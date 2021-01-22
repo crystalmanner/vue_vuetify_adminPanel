@@ -8,7 +8,7 @@ Build and deploy automized with github Actions & github Pages
 
 ## Preview
 
-![Preview](https://github.com/crstalmanner/vue_vuetify_adminPanel/blob/master/static/template.gif)
+![Preview](https://github.com/crystalmanner/vue_vuetify_adminPanel/blob/master/static/template.gif)
 
 ### Reference
 
