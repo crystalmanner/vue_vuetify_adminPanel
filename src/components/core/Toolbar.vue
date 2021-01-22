@@ -270,7 +270,8 @@ export default {
           title: 'Log Out',
           click: () => {
             const vm = this;
-
+            localStorage.setItem('token', "");
+            localStorage.setItem('userId', "");
             vm.$router.push({ name: 'Login' });
           }
         }
@@ -416,6 +417,4 @@ export default {
     width: 235px;
     margin-right: 10px;
   }
-  
-  
 </style>
