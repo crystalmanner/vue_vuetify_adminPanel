@@ -130,16 +130,16 @@
 <script>
 export default {
   props: {
-    toggle: {
-        type: Boolean,
-        required: false,
-        default: true
-    }
   },
 
   data() {
     return {
-      selectedIndex: 1
+      selectedIndex: 1,
+      toggle: {
+        type: Boolean,
+        required: false,
+        default: true
+      }
     }
   },
 

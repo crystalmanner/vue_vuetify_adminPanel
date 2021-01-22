@@ -270,8 +270,9 @@ export default {
           title: 'Log Out',
           click: () => {
             const vm = this;
-            localStorage.setItem('token', "");
-            localStorage.setItem('userId', "");
+            localStorage.removeItem('user');
+            // localStorage.setItem('token', "");
+            // localStorage.setItem('userId', "");
             vm.$router.push({ name: 'Login' });
           }
         }

@@ -24,7 +24,8 @@ function requireToken(to, from, next) {
     return next();
   }
 
-  if (!localStorage.getItem('token') || !localStorage.getItem('userId')) {
+  let user = JSON.parse(localStorage.getItem('user'));
+  if (!user || !user.accessToken) {
     return next('/login');
   }
   return next();

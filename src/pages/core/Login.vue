@@ -16,7 +16,7 @@
                     name="login"
                     label="Login"
                     type="text"
-                    v-model="userEmail"
+                    v-model="user.username"
                     :error="error"
                     :rules="[rules.required]"/>
                   <v-text-field
@@ -26,7 +26,7 @@
                     label="Password"
                     id="password"
                     :rules="[rules.required]"
-                    v-model="password"
+                    v-model="user.password"
                     :error="error"
                     @click:append="hidePassword = !hidePassword"/>
                 </v-form>
@@ -50,12 +50,16 @@
 </template>
 
 <script>
+import axios from 'axios';
+import User from '../../models/user';
+
+const API_URL = 'http://localhost:8081/api/auth/';
+
 export default {
   data() {
     return {
+      user: new User('', ''),
       loading: false,
-      userEmail: 'admin@admin.com',
-      password: '123456',
       hidePassword: true,
       error: false,
       showResult: false,
@@ -66,29 +70,37 @@ export default {
     }
   },
 
+  computed: {
+    loggedIn() {
+      return this.$store.state.auth.status.loggedIn;
+    }
+  },
+  created() {
+    if (this.loggedIn) {
+      this.$router.push({ name: 'Dashboard' });
+    }
+  },
+
   methods: {
     login() {
       const vm = this;
-
-      if (!vm.userEmail || !vm.password) {
+      if (!vm.user.username || !vm.user.password) {
 
         vm.result = "Email and Password can't be null.";
         vm.showResult = true;
 
         return;
       }
-
-      if (vm.userEmail === vm.$root.userEmail && vm.password === vm.$root.userPassword) {
-        //get token and user id from backend and store it on local storage
-        localStorage.setItem('token', 'token');
-        localStorage.setItem('userId', 0);
-        vm.$router.push({ name: 'Dashboard' });
-      }
-      else {
-        vm.error = true;
-        vm.result = "Email or Password is incorrect.";
-        vm.showResult = true;
-      }
+      this.$store.dispatch('auth/login', vm.user).then(
+        () => {
+          vm.$router.push({ name: 'Dashboard' });
+        },
+        error => {
+          vm.loading = false;
+          vm.result = "Email or Password is incorrect.";
+          vm.showResult = true;
+        }
+      );
     }
   }
 }
