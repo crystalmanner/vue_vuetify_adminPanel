@@ -1,5 +1,5 @@
 # Vue Admin Template
-Sample Admin Template based on Vuejs &amp; Vuetify.
+Sample Admin Template based on Vuejs &amp; Vuetify &amp; Node/Express &amp; MySQL.
 
 ## Introduction
 This project is based on Vue, Vuetify, Node/Express and MySQL.
